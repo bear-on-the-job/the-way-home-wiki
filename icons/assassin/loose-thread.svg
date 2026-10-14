@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Loose Thread: trait icon proposal. White is kept; black cuts away what is under it. -->
+  <path d="M24,30 C36,8 62,16 54,32 C48,44 30,38 32,50 C34,58 48,60 58,54" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g stroke="#000" stroke-width="3" stroke-linejoin="round" paint-order="stroke"><g transform="translate(20 34) rotate(32) scale(1.0)"><path d="M0,-32 L3.6,-26 L3.6,26 L0,32 L-3.6,26 L-3.6,-26 Z" fill="#fff"/><ellipse cx="0" cy="-20" rx="1.4" ry="5" fill="#000"/></g></g>
+</svg>

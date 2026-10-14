@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Hidden Pockets: trait icon proposal. White is kept; black cuts away what is under it. -->
+  <g transform="translate(40 22) rotate(20) scale(0.8)"><path d="M0,-30 C3,-22 5,-12 5,-3 L-5,-3 C-5,-12 -3,-22 0,-30 Z" fill="#fff"/><path d="M-.8,-24 L.8,-24 L.8,-6 L-.8,-6 Z" fill="#000"/><rect x="-11" y="-3" width="22" height="4.5" rx="2" fill="#fff"/><rect x="-2.6" y="1.5" width="5.2" height="14" rx="1" fill="#fff"/><circle cx="0" cy="20" r="4.2" fill="#fff"/></g><g stroke="#000" stroke-width="3.2" stroke-linejoin="round" paint-order="stroke"><path d="M14,26 L50,26 C58,36 58,56 46,60 L18,60 C6,56 6,36 14,26 Z" fill="#fff"/></g><path d="M14,32 C24,36 40,36 50,32" fill="none" stroke="#000" stroke-width="3"/><circle cx="32" cy="46" r="4" fill="#000"/>
+</svg>
