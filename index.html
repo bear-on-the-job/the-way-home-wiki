@@ -36,7 +36,7 @@ footer{margin-top:44px;color:var(--faint);font-size:13px;border-top:1px solid va
 .tile{position:relative;background:none;border:0;color:var(--text);font:inherit;cursor:pointer;padding:10px 4px 8px;border-radius:6px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .tile:focus-visible{outline:1px solid var(--sand)}
 .tile .badge-box{position:relative;width:64px;height:64px}
-.tile .mark{position:absolute;inset:-9px;opacity:0;transition:opacity .12s;transform-origin:center}
+.tile .mark{position:absolute;inset:-16px;overflow:visible;opacity:0;transition:opacity .12s;transform-origin:center}
 .tile .mark rect{fill:none}
 .tile .mark .ring{stroke:#000;stroke-width:5}
 .tile .mark .trim{stroke:var(--group);stroke-width:2;opacity:0;transition:opacity .15s}
@@ -52,7 +52,7 @@ footer{margin-top:44px;color:var(--faint);font-size:13px;border-top:1px solid va
 /* ---- the group header: badge, banner, name (#814) ---- */
 .group-header{display:flex;align-items:center;gap:0;margin:28px 0 6px}
 .group-header .badge-box{width:44px;height:44px;position:relative;flex:none;z-index:2}
-.group-header .banner{height:28px;flex:1;display:flex;align-items:center;padding-left:14px;margin-left:-6px;font-size:22px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+.group-header .banner{height:28px;flex:1;display:flex;align-items:center;padding-left:30px;margin-left:-22px;position:relative;z-index:1;font-size:22px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   background:linear-gradient(90deg,var(--banner) 0 35%,transparent 100%)}
 .group-desc{color:var(--muted);margin:4px 0 0 52px;max-width:900px}
 .group-note{margin:4px 0 0 52px;font:11px Arial,sans-serif;letter-spacing:1.5px;color:var(--sand);text-transform:uppercase}
@@ -83,7 +83,6 @@ footer{margin-top:44px;color:var(--faint);font-size:13px;border-top:1px solid va
 .hex:hover .rim{opacity:1}
 .hex .line{position:absolute;left:50%;top:100%;width:1px;height:38px;background:var(--border)}
 .hex:last-child .line{display:none}
-.hex-name{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;font-size:12px;color:var(--muted);white-space:nowrap;pointer-events:none}
 .pickline{margin:18px 10px 0;color:var(--muted);font-size:13px}
 
 /* ---- the Cards tab: the full-art card (the style boards) ---- */
@@ -117,13 +116,16 @@ footer{margin-top:44px;color:var(--faint);font-size:13px;border-top:1px solid va
 .swatch{width:22px;height:6px;border-radius:2px;display:inline-block}
 
 /* ---- the tooltip: the kit popup the game shows beside a hovered trait or card (#875, #1112) ---- */
-.tooltip{position:fixed;z-index:50;width:280px;background:var(--window);border:1px solid var(--border);box-shadow:0 0 0 1px #0008, 0 8px 24px #000a;padding:12px 14px 12px;pointer-events:none;opacity:0;transition:opacity .12s;
-  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
+.tooltip{position:fixed;z-index:50;width:280px;background:var(--border);padding:13px 15px 13px;pointer-events:none;opacity:0;transition:opacity .12s;isolation:isolate;
+  clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px)}
+/* the kit's ChamferFill: the 45-degree cut of 6 texels (3 game units at the kit's scale 2) on all four corners; the 1px border is the layer under the window-coloured inset */
+.tooltip::before{content:"";position:absolute;inset:1px;z-index:-1;background:var(--window);
+  clip-path:polygon(5px 0,calc(100% - 5px) 0,100% 5px,100% calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,0 calc(100% - 5px),0 5px)}
 .tooltip.show{opacity:1}
 .tooltip h3{margin:0 0 4px;font-size:18px;font-weight:700;line-height:1.15}
 .tooltip .desc{color:var(--muted);font-size:14px;margin:0 0 8px}
 .tooltip .pills{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px}
-.tooltip .pill{font:11px Arial,sans-serif;letter-spacing:.6px;padding:2px 7px;border-radius:3px;background:var(--inset);border:1px solid var(--muted);color:var(--muted)}
+.tooltip .pill{font:11px Arial,sans-serif;letter-spacing:.6px;box-sizing:border-box;height:20px;line-height:18px;padding:0 9px;border-radius:10px;background:var(--inset);border:1px solid var(--muted);color:var(--muted);white-space:nowrap}
 .tooltip .rulehair{height:1px;background:var(--border);margin:0 0 8px}
 .tooltip .line{font-size:14px;margin:0 0 5px;color:var(--text)}
 .tooltip .line+.line{border-top:1px solid #ffffff0d;padding-top:5px}
@@ -182,7 +184,7 @@ function renderTiles() {
   $("#tiles").innerHTML = DATA.groups.map(g => `
     <button class="tile" data-id="${g.id}" style="--group:${g.color}" title="${esc(g.name)}">
       <div class="badge-box">
-        <svg class="mark" viewBox="-41 -41 82 82"><rect class="ring" x="-27" y="-27" width="54" height="54" rx="6" transform="rotate(45)"/><rect class="trim" x="-31.5" y="-31.5" width="63" height="63" rx="7" transform="rotate(45)"/></svg>
+        <svg class="mark" viewBox="-48 -48 96 96"><rect class="ring" x="-27" y="-27" width="54" height="54" rx="6" transform="rotate(45)"/><rect class="trim" x="-31.5" y="-31.5" width="63" height="63" rx="7" transform="rotate(45)"/></svg>
         ${mask("badges/Field.svg", "field")}${mask(`badges/${g.id}.svg`, "badge")}
       </div>
       <div class="name">${esc(g.name)}</div>
@@ -251,7 +253,7 @@ function hex(g, t, i) {
   return `<button class="hex" data-i="${index}" aria-label="${esc(t.name)}">
     ${mask("icons/Hex.svg", "fill")}${mask("icons/HexEdge.svg", "edge")}${mask("icons/HexRim.svg", "rim")}
     ${mask(icon, "icon")}
-    <span class="line"></span><span class="hex-name">${esc(t.name)}</span>
+    <span class="line"></span>
   </button>`;
 }
 
